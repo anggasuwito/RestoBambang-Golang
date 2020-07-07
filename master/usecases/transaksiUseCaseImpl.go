@@ -3,6 +3,8 @@ package usecases
 import (
 	"gomux/main/master/models"
 	"gomux/main/master/repositories"
+	"gomux/utils"
+	"log"
 )
 
 //TransaksiUsecaseImpl TransaksiUsecaseImpl
@@ -19,19 +21,19 @@ func (s TransaksiUsecaseImpl) GetAllTransaksi() ([]*models.Transaksi, error) {
 	return transaksi, nil
 }
 
-// //AddTransaksi InsertTransaksi
-// func (s TransaksiUsecaseImpl) AddTransaksi(newTransaksi models.Transaksi) error {
-// 	err := utils.ValidateInputNotNil(newTransaksi.IDTransaksi, newTransaksi.TanggalTransaksi, newTransaksi.JenisTransaksi, newTransaksi.NamaTransaksi, newTransaksi.HargaTransaksi, newTransaksi.StokTransaksi)
+//AddTransaksi InsertTransaksi
+func (s TransaksiUsecaseImpl) AddTransaksi(newTransaksi models.Transaksi) error {
+	err := utils.ValidateInputNotNil(newTransaksi.IDTransaksi, newTransaksi.TanggalTransaksi, newTransaksi.JenisMenu, newTransaksi.NamaMenu, newTransaksi.HargaMenu, newTransaksi.NamaEkstraMenu, newTransaksi.HargaEkstraMenu, newTransaksi.TotalHarga)
 
-// 	if err != nil {
-// 		return err
-// 	}
-// 	err = s.transaksiRepo.AddTransaksi(newTransaksi)
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-// 	return err
-// }
+	if err != nil {
+		return err
+	}
+	err = s.transaksiRepo.AddTransaksi(newTransaksi)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return err
+}
 
 // //GetTransaksiByID GetTransaksiByID
 // func (s TransaksiUsecaseImpl) GetTransaksiByID(id string) (models.Transaksi, error) {

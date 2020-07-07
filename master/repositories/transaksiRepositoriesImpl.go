@@ -3,6 +3,7 @@ package repositories
 import (
 	"database/sql"
 	"gomux/main/master/models"
+	"log"
 )
 
 //TransaksiRepoImpl TransaksiRepoImpl
@@ -34,21 +35,21 @@ func (s TransaksiRepoImpl) GetAllTransaksi() ([]*models.Transaksi, error) {
 	return dataTransaksi, nil
 }
 
-// //AddTransaksi InsertTransaksiData
-// func (s TransaksiRepoImpl) AddTransaksi(newTransaksi models.Transaksi) error {
+//AddTransaksi InsertTransaksiData
+func (s TransaksiRepoImpl) AddTransaksi(newTransaksi models.Transaksi) error {
 
-// 	tr, err := s.db.Begin()
-// 	query := `insert into list_transaksi(id_list_transaksi,tanggal,id_jenis,id_transaksi,id_harga_transaksi,id_stok_transaksi)values(?,?,?,?,?,?)`
-// 	_, err = s.db.Query(query, &newTransaksi.IDTransaksi, &newTransaksi.TanggalTransaksi, &newTransaksi.JenisMenu, &newTransaksi.NamaMenu, &newTransaksi.HargaMenu, &newTransaksi.NamaEkstraMenu, &newTransaksi.HargaEkstraMenu, &newTransaksi.TotalHarga)
-// 	if err != nil {
-// 		tr.Rollback()
-// 		log.Fatal(err)
-// 	} else {
-// 		tr.Commit()
-// 	}
+	tr, err := s.db.Begin()
+	query := `insert into list_transaksi(id_list_transaksi,tanggal,id_jenis,id_transaksi,id_harga_transaksi,id_stok_transaksi)values(?,?,?,?,?,?)`
+	_, err = s.db.Query(query, &newTransaksi.IDTransaksi, &newTransaksi.TanggalTransaksi, &newTransaksi.JenisMenu, &newTransaksi.NamaMenu, &newTransaksi.HargaMenu, &newTransaksi.NamaEkstraMenu, &newTransaksi.HargaEkstraMenu, &newTransaksi.TotalHarga)
+	if err != nil {
+		tr.Rollback()
+		log.Fatal(err)
+	} else {
+		tr.Commit()
+	}
 
-// 	return nil
-// }
+	return nil
+}
 
 // //GetTransaksiByID GetAllTransaksiById
 // func (s TransaksiRepoImpl) GetTransaksiByID(id string) (models.Transaksi, error) {

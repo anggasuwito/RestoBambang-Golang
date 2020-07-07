@@ -2,7 +2,9 @@ package controllers
 
 import (
 	"encoding/json"
+	"gomux/main/master/models"
 	"gomux/main/master/usecases"
+	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -18,7 +20,7 @@ func TransaksiController(r *mux.Router, service usecases.TransaksiUseCase) {
 	TransaksiHandler := TransaksiHandler{service}
 	r.HandleFunc("/alltransaksi", TransaksiHandler.AllTransaksi).Methods(http.MethodGet)
 	// r.HandleFunc("/transaksi/{id}", TransaksiHandler.TransaksiByID).Methods(http.MethodGet)
-	// r.HandleFunc("/transaksi", TransaksiHandler.AddTransaksi).Methods(http.MethodPost)
+	r.HandleFunc("/transaksi", TransaksiHandler.AddTransaksi).Methods(http.MethodPost)
 	// r.HandleFunc("/transaksi/{id}", TransaksiHandler.UpdateTransaksi).Methods(http.MethodPut)
 	// r.HandleFunc("/transaksi/{id}", TransaksiHandler.DeleteTransaksi).Methods(http.MethodDelete)
 	// r.HandleFunc("/alljenis", TransaksiHandler.AllJenis).Methods(http.MethodGet)
@@ -41,18 +43,18 @@ func (s TransaksiHandler) AllTransaksi(w http.ResponseWriter, r *http.Request) {
 	w.Write(byteOfAllTransaksi)
 }
 
-// //AddTransaksi InsertTransaksi
-// func (s TransaksiHandler) AddTransaksi(w http.ResponseWriter, r *http.Request) {
-// 	var newTransaksi models.Transaksi
-// 	_ = json.NewDecoder(r.Body).Decode(&newTransaksi)
-// 	err := s.TransaksiUseCase.AddTransaksi(newTransaksi)
-// 	if err != nil {
-// 		w.Write([]byte("Insert Failed Cannot null"))
-// 		log.Print(err)
-// 	} else {
-// 		w.Write([]byte("Insert Success"))
-// 	}
-// }
+//AddTransaksi InsertTransaksi
+func (s TransaksiHandler) AddTransaksi(w http.ResponseWriter, r *http.Request) {
+	var newTransaksi models.Transaksi
+	_ = json.NewDecoder(r.Body).Decode(&newTransaksi)
+	err := s.TransaksiUseCase.AddTransaksi(newTransaksi)
+	if err != nil {
+		w.Write([]byte("Insert Failed Cannot null"))
+		log.Print(err)
+	} else {
+		w.Write([]byte("Insert Success"))
+	}
+}
 
 // //TransaksiByID TransaksiById
 // func (s TransaksiHandler) TransaksiByID(w http.ResponseWriter, r *http.Request) {
