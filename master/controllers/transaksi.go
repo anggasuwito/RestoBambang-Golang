@@ -43,18 +43,18 @@ func (s TransaksiHandler) AllTransaksi(w http.ResponseWriter, r *http.Request) {
 	w.Write(byteOfAllTransaksi)
 }
 
-//AddTransaksi InsertTransaksi
-func (s TransaksiHandler) AddTransaksi(w http.ResponseWriter, r *http.Request) {
-	var newTransaksi models.Transaksi
-	_ = json.NewDecoder(r.Body).Decode(&newTransaksi)
-	err := s.TransaksiUseCase.AddTransaksi(newTransaksi)
-	if err != nil {
-		w.Write([]byte("Insert Failed Cannot null"))
-		log.Print(err)
-	} else {
-		w.Write([]byte("Insert Success"))
-	}
-}
+// //AddTransaksi InsertTransaksi
+// func (s TransaksiHandler) AddTransaksi(w http.ResponseWriter, r *http.Request) {
+// 	var newTransaksi models.Transaksi
+// 	_ = json.NewDecoder(r.Body).Decode(&newTransaksi)
+// 	err := s.TransaksiUseCase.AddTransaksi(newTransaksi)
+// 	if err != nil {
+// 		w.Write([]byte("Insert Failed Cannot null"))
+// 		log.Print(err)
+// 	} else {
+// 		w.Write([]byte("Insert Success"))
+// 	}
+// }
 
 // //TransaksiByID TransaksiById
 // func (s TransaksiHandler) TransaksiByID(w http.ResponseWriter, r *http.Request) {
