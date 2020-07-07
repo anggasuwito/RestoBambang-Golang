@@ -20,7 +20,7 @@ func TransaksiController(r *mux.Router, service usecases.TransaksiUseCase) {
 	TransaksiHandler := TransaksiHandler{service}
 	r.HandleFunc("/alltransaksi", TransaksiHandler.AllTransaksi).Methods(http.MethodGet)
 	// r.HandleFunc("/transaksi/{id}", TransaksiHandler.TransaksiByID).Methods(http.MethodGet)
-	r.HandleFunc("/transaksi", TransaksiHandler.AddTransaksi).Methods(http.MethodPost)
+	//r.HandleFunc("/transaksi", TransaksiHandler.AddTransaksi).Methods(http.MethodPost)
 	// r.HandleFunc("/transaksi/{id}", TransaksiHandler.UpdateTransaksi).Methods(http.MethodPut)
 	// r.HandleFunc("/transaksi/{id}", TransaksiHandler.DeleteTransaksi).Methods(http.MethodDelete)
 	// r.HandleFunc("/alljenis", TransaksiHandler.AllJenis).Methods(http.MethodGet)
