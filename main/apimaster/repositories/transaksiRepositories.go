@@ -1,6 +1,6 @@
 package repositories
 
-import "gomux/main/master/models"
+import "gomux/main/apimaster/models"
 
 //TransaksiRepository TransaksiRepository
 type TransaksiRepository interface {

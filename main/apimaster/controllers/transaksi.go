@@ -2,9 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
-	"gomux/main/master/models"
-	"gomux/main/master/usecases"
-	"log"
+	"gomux/main/apimaster/usecases"
 	"net/http"
 
 	"github.com/gorilla/mux"

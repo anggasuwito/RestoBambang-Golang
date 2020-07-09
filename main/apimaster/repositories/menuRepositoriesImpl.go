@@ -2,7 +2,7 @@ package repositories
 
 import (
 	"database/sql"
-	"gomux/main/master/models"
+	"gomux/main/apimaster/models"
 	"log"
 )
 
@@ -110,25 +110,6 @@ func (s MenuRepoImpl) DeleteDataMenuByID(id string) error {
 	}
 
 	return nil
-}
-
-//GetAllJenis GetAllJenis
-func (s MenuRepoImpl) GetAllJenis() ([]*models.Jenis, error) {
-	dataJenis := []*models.Jenis{}
-	query := "select * from jenis"
-	data, err := s.db.Query(query)
-	if err != nil {
-		return nil, err
-	}
-	for data.Next() {
-		jenis := models.Jenis{}
-		var err = data.Scan(&jenis.IDJenis, &jenis.NamaJenis)
-		if err != nil {
-			return nil, err
-		}
-		dataJenis = append(dataJenis, &jenis)
-	}
-	return dataJenis, nil
 }
 
 //InitMenuRepoImpl InitMenuRepoImpl

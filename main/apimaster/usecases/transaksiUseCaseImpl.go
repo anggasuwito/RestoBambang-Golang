@@ -1,10 +1,8 @@
 package usecases
 
 import (
-	"gomux/main/master/models"
-	"gomux/main/master/repositories"
-	"gomux/utils"
-	"log"
+	"gomux/main/apimaster/models"
+	"gomux/main/apimaster/repositories"
 )
 
 //TransaksiUsecaseImpl TransaksiUsecaseImpl
@@ -20,7 +18,6 @@ func (s TransaksiUsecaseImpl) GetAllTransaksi() ([]*models.Transaksi, error) {
 	}
 	return transaksi, nil
 }
-
 
 // //GetTransaksiByID GetTransaksiByID
 // func (s TransaksiUsecaseImpl) GetTransaksiByID(id string) (models.Transaksi, error) {

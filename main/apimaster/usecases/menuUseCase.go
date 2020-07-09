@@ -1,6 +1,6 @@
 package usecases
 
-import "gomux/main/master/models"
+import "gomux/main/apimaster/models"
 
 //MenuUseCase MenuUseCase
 type MenuUseCase interface {
@@ -9,5 +9,4 @@ type MenuUseCase interface {
 	GetMenuByID(id string) (models.Menu, error)
 	UpdateMenusByID(id string, changeMenu models.Menu) error
 	DeleteMenusByID(id string) error
-	GetAllJenis() ([]*models.Jenis, error)
 }

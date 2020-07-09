@@ -2,9 +2,9 @@ package master
 
 import (
 	"gomux/config"
-	"gomux/main/master/controllers"
-	"gomux/main/master/repositories"
-	"gomux/main/master/usecases"
+	"gomux/main/apimaster/controllers"
+	"gomux/main/apimaster/repositories"
+	"gomux/main/apimaster/usecases"
 )
 
 //Init Init

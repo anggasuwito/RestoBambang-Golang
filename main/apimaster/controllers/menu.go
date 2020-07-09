@@ -2,8 +2,8 @@ package controllers
 
 import (
 	"encoding/json"
-	"gomux/main/master/models"
-	"gomux/main/master/usecases"
+	"gomux/main/apimaster/models"
+	"gomux/main/apimaster/usecases"
 	"log"
 	"net/http"
 
@@ -23,8 +23,6 @@ func MenuController(r *mux.Router, service usecases.MenuUseCase) {
 	r.HandleFunc("/menu", MenuHandler.AddMenu).Methods(http.MethodPost)
 	r.HandleFunc("/menu/{id}", MenuHandler.UpdateMenu).Methods(http.MethodPut)
 	r.HandleFunc("/menu/{id}", MenuHandler.DeleteMenu).Methods(http.MethodDelete)
-	r.HandleFunc("/alljenis", MenuHandler.AllJenis).Methods(http.MethodGet)
-
 }
 
 //AllMenus AllMenus
@@ -103,20 +101,4 @@ func (s MenuHandler) DeleteMenu(w http.ResponseWriter, r *http.Request) {
 	} else {
 		w.Write([]byte("Data Deleted"))
 	}
-}
-
-//AllJenis AllJenis
-func (s MenuHandler) AllJenis(w http.ResponseWriter, r *http.Request) {
-	allJenis, err := s.MenuUseCase.GetAllJenis()
-	w.Header().Set("Content-Type", "application/json")
-	if err != nil {
-		w.Write([]byte("Data Not Found"))
-	}
-	byteOfAllJenis, err := json.Marshal(allJenis)
-	if err != nil {
-		w.Write([]byte("Oops something when wrong"))
-	}
-
-	w.WriteHeader(http.StatusOK)
-	w.Write(byteOfAllJenis)
 }

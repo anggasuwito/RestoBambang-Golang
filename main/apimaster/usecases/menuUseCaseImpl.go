@@ -1,8 +1,8 @@
 package usecases
 
 import (
-	"gomux/main/master/models"
-	"gomux/main/master/repositories"
+	"gomux/main/apimaster/models"
+	"gomux/main/apimaster/repositories"
 	"gomux/utils"
 	"log"
 )
@@ -62,15 +62,6 @@ func (s MenuUsecaseImpl) DeleteMenusByID(id string) error {
 		return err
 	}
 	return nil
-}
-
-//GetAllJenis GetMenus
-func (s MenuUsecaseImpl) GetAllJenis() ([]*models.Jenis, error) {
-	menu, err := s.menuRepo.GetAllJenis()
-	if err != nil {
-		return nil, err
-	}
-	return menu, nil
 }
 
 //InitMenuUseCase InitMenuUseCase

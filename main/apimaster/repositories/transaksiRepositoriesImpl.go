@@ -2,8 +2,7 @@ package repositories
 
 import (
 	"database/sql"
-	"gomux/main/master/models"
-	"log"
+	"gomux/main/apimaster/models"
 )
 
 //TransaksiRepoImpl TransaksiRepoImpl

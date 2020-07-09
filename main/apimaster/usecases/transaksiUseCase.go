@@ -1,6 +1,6 @@
 package usecases
 
-import "gomux/main/master/models"
+import "gomux/main/apimaster/models"
 
 //TransaksiUseCase TransaksiUseCase
 type TransaksiUseCase interface {

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"gomux/main/master"
+	master "gomux/main/apimaster"
 )
 
 func main() {
