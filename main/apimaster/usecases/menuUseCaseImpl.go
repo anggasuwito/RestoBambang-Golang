@@ -23,7 +23,7 @@ func (s MenuUsecaseImpl) GetAllMenus() ([]*models.Menu, error) {
 
 //AddMenu InsertMenus
 func (s MenuUsecaseImpl) AddMenu(newMenu models.Menu) error {
-	err := utils.ValidateInputNotNil(newMenu.IDMenu, newMenu.TanggalMenu, newMenu.JenisMenu, newMenu.NamaMenu, newMenu.HargaMenu, newMenu.StokMenu)
+	err := utils.ValidateInputNotNil(newMenu.JenisMenu, newMenu.NamaMenu, newMenu.HargaMenu, newMenu.StokMenu)
 
 	if err != nil {
 		return err

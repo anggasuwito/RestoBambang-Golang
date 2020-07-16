@@ -31,10 +31,12 @@ func (s MenuHandler) AllMenus(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	if err != nil {
 		w.Write([]byte("Data Not Found"))
+		log.Println("Data Not Found")
 	}
 	byteOfAllMenus, err := json.Marshal(allMenus)
 	if err != nil {
 		w.Write([]byte("Oops something when wrong"))
+		log.Println("Oops something when wrong")
 	}
 
 	w.WriteHeader(http.StatusOK)
@@ -51,6 +53,7 @@ func (s MenuHandler) AddMenu(w http.ResponseWriter, r *http.Request) {
 		log.Print(err)
 	} else {
 		w.Write([]byte("Insert Success"))
+		log.Println("Insert Success")
 	}
 }
 
@@ -66,6 +69,7 @@ func (s MenuHandler) MenuByID(w http.ResponseWriter, r *http.Request) {
 	byteOfMenuByID, err2 := json.Marshal(menu)
 	if err2 != nil {
 		w.Write([]byte("Oops something when wrong"))
+		log.Println("Oops something when wrong")
 	} else if err == nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
@@ -85,6 +89,7 @@ func (s MenuHandler) UpdateMenu(w http.ResponseWriter, r *http.Request) {
 		log.Println("Data not found")
 	} else {
 		w.Write([]byte("Data Updated"))
+		log.Println("Data Updated")
 	}
 
 }
@@ -100,5 +105,6 @@ func (s MenuHandler) DeleteMenu(w http.ResponseWriter, r *http.Request) {
 		log.Println("Data not found")
 	} else {
 		w.Write([]byte("Data Deleted"))
+		log.Println("Data Deleted")
 	}
 }
