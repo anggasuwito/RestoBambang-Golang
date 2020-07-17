@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"gomux/main/apimaster/models"
 	"gomux/main/apimaster/usecases"
+	"gomux/utils"
 	"log"
 	"net/http"
 
@@ -33,14 +34,15 @@ func (s TransaksiHandler) AllTransaksi(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Data Not Found"))
 		log.Println("Data Not Found")
 	}
-	byteOfAllTransaksi, err := json.Marshal(allTransaksi)
+	transaksiResponse := utils.Response{Status: http.StatusOK, Messages: "Data of Menu", Data: allTransaksi}
+	byteOfTransaksiResponse, err := json.Marshal(transaksiResponse)
 	if err != nil {
 		w.Write([]byte("Oops something when wrong"))
 		log.Println("Oops something when wrong")
 	}
 
 	w.WriteHeader(http.StatusOK)
-	w.Write(byteOfAllTransaksi)
+	w.Write(byteOfTransaksiResponse)
 }
 
 //AddTransaksi InsertTransaksi
@@ -66,14 +68,15 @@ func (s TransaksiHandler) TransaksiByID(w http.ResponseWriter, r *http.Request) 
 		w.Write([]byte("Data Not Found"))
 		log.Println("Data not found")
 	}
-	byteOfTransaksiByID, err2 := json.Marshal(transaksi)
+	transaksiResponseByID := utils.Response{Status: http.StatusOK, Messages: "Data of Menu", Data: transaksi}
+	byteOfResponseTransaksiByID, err2 := json.Marshal(transaksiResponseByID)
 	if err2 != nil {
 		w.Write([]byte("Oops something when wrong"))
 		log.Println("Oops something when wrong")
 	} else if err == nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
-		w.Write(byteOfTransaksiByID)
+		w.Write(byteOfResponseTransaksiByID)
 	}
 }
 

@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"gomux/main/apimaster/models"
 	"gomux/main/apimaster/usecases"
+	"gomux/utils"
 	"log"
 	"net/http"
 
@@ -33,14 +34,15 @@ func (s MenuHandler) AllMenus(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Data Not Found"))
 		log.Println("Data Not Found")
 	}
-	byteOfAllMenus, err := json.Marshal(allMenus)
+	menuResponse := utils.Response{Status: http.StatusOK, Messages: "Data of Menu", Data: allMenus}
+	byteOfMenuResponse, err := json.Marshal(menuResponse)
 	if err != nil {
 		w.Write([]byte("Oops something when wrong"))
 		log.Println("Oops something when wrong")
 	}
 
 	w.WriteHeader(http.StatusOK)
-	w.Write(byteOfAllMenus)
+	w.Write(byteOfMenuResponse)
 }
 
 //AddMenu InsertMenu
@@ -66,14 +68,15 @@ func (s MenuHandler) MenuByID(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Data Not Found"))
 		log.Println("Data not found")
 	}
-	byteOfMenuByID, err2 := json.Marshal(menu)
+	menuResponse := utils.Response{Status: http.StatusOK, Messages: "Data of Menu", Data: menu}
+	byteOfMenuResponseByID, err2 := json.Marshal(menuResponse)
 	if err2 != nil {
 		w.Write([]byte("Oops something when wrong"))
 		log.Println("Oops something when wrong")
 	} else if err == nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
-		w.Write(byteOfMenuByID)
+		w.Write(byteOfMenuResponseByID)
 	}
 }
 
