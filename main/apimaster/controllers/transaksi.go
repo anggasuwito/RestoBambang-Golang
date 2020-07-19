@@ -34,7 +34,7 @@ func (s TransaksiHandler) AllTransaksi(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Data Not Found"))
 		log.Println("Data Not Found")
 	}
-	transaksiResponse := utils.Response{Status: http.StatusOK, Messages: "Data of Menu", Data: allTransaksi}
+	transaksiResponse := utils.Response{Status: http.StatusOK, Messages: "Data of Transaksi", Data: allTransaksi}
 	byteOfTransaksiResponse, err := json.Marshal(transaksiResponse)
 	if err != nil {
 		w.Write([]byte("Oops something when wrong"))
@@ -68,7 +68,7 @@ func (s TransaksiHandler) TransaksiByID(w http.ResponseWriter, r *http.Request) 
 		w.Write([]byte("Data Not Found"))
 		log.Println("Data not found")
 	}
-	transaksiResponseByID := utils.Response{Status: http.StatusOK, Messages: "Data of Menu", Data: transaksi}
+	transaksiResponseByID := utils.Response{Status: http.StatusOK, Messages: "Data of Transaksi", Data: transaksi}
 	byteOfResponseTransaksiByID, err2 := json.Marshal(transaksiResponseByID)
 	if err2 != nil {
 		w.Write([]byte("Oops something when wrong"))
