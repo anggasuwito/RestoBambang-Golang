@@ -3,7 +3,6 @@ package repositories
 import (
 	"database/sql"
 	"gomux/main/apimaster/models"
-	"log"
 
 	"github.com/google/uuid"
 )
@@ -40,11 +39,10 @@ func (s MenuRepoImpl) AddMenu(newMenu models.Menu) error {
 	_, err = s.db.Query(query1, newMenuID, &newMenu.JenisMenu, &newMenu.NamaMenu, &newMenu.HargaMenu, &newMenu.StokMenu)
 	if err != nil {
 		tr.Rollback()
-		log.Fatal(err)
-	} else {
-		tr.Commit()
+		return err
 	}
 
+	tr.Commit()
 	return nil
 }
 
@@ -94,17 +92,16 @@ func (s MenuRepoImpl) DeleteDataMenuByID(id string) error {
 	_, err = s.db.Query(query1, id)
 	if err != nil {
 		tr.Rollback()
-		log.Fatal(err)
+		return err
 	}
 
 	query2 := "delete from menu where menu_id = ?"
 	_, err = s.db.Query(query2, id)
 	if err != nil {
 		tr.Rollback()
-		log.Fatal(err)
-	} else {
-		tr.Commit()
+		return err
 	}
+	tr.Commit()
 
 	return nil
 }

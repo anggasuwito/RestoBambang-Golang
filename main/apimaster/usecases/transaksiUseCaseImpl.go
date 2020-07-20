@@ -4,7 +4,6 @@ import (
 	"gomux/main/apimaster/models"
 	"gomux/main/apimaster/repositories"
 	"gomux/utils"
-	"log"
 )
 
 //TransaksiUsecaseImpl TransaksiUsecaseImpl
@@ -29,7 +28,7 @@ func (s TransaksiUsecaseImpl) AddTransaksi(newTransaksi models.Transaksi) error 
 	}
 	err = s.transaksiRepo.AddTransaksi(newTransaksi)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	return err
 }

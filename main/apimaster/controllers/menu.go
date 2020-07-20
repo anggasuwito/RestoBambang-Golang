@@ -31,16 +31,17 @@ func (s MenuHandler) AllMenus(w http.ResponseWriter, r *http.Request) {
 	allMenus, err := s.MenuUseCase.GetAllMenus()
 	w.Header().Set("Content-Type", "application/json")
 	if err != nil {
-		w.Write([]byte("Data Not Found"))
-		log.Println("Data Not Found")
+		w.Write([]byte("Data Menu Not Found"))
+		log.Println("Data Menu Not Found")
 	}
 	menuResponse := utils.Response{Status: http.StatusOK, Messages: "Data of Menu", Data: allMenus}
 	byteOfMenuResponse, err := json.Marshal(menuResponse)
 	if err != nil {
-		w.Write([]byte("Oops something when wrong"))
-		log.Println("Oops something when wrong")
+		w.Write([]byte("Oops something when wrong from Menu"))
+		log.Println("Oops something when wrong from Menu")
 	}
-
+	log.Println("get all menu success")
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(byteOfMenuResponse)
 }
@@ -51,11 +52,11 @@ func (s MenuHandler) AddMenu(w http.ResponseWriter, r *http.Request) {
 	_ = json.NewDecoder(r.Body).Decode(&newMenu)
 	err := s.MenuUseCase.AddMenu(newMenu)
 	if err != nil {
-		w.Write([]byte("Insert Failed Cannot null"))
+		w.Write([]byte("Insert Menu Failed Cannot null"))
 		log.Print(err)
 	} else {
-		w.Write([]byte("Insert Success"))
-		log.Println("Insert Success")
+		w.Write([]byte("Insert Menu Success"))
+		log.Println("Insert Menu Success")
 	}
 }
 
@@ -65,15 +66,16 @@ func (s MenuHandler) MenuByID(w http.ResponseWriter, r *http.Request) {
 	idMenu := param["id"]
 	menu, err := s.MenuUseCase.GetMenuByID(idMenu)
 	if err != nil {
-		w.Write([]byte("Data Not Found"))
-		log.Println("Data not found")
+		w.Write([]byte("Data Menu Not Found"))
+		log.Println("Data Menu not found")
 	}
 	menuResponse := utils.Response{Status: http.StatusOK, Messages: "Data of Menu", Data: menu}
 	byteOfMenuResponseByID, err2 := json.Marshal(menuResponse)
 	if err2 != nil {
-		w.Write([]byte("Oops something when wrong"))
-		log.Println("Oops something when wrong")
+		w.Write([]byte("Oops something when wrong from Menu"))
+		log.Println("Oops something when wrong from Menu")
 	} else if err == nil {
+		log.Println("get menu from id success")
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		w.Write(byteOfMenuResponseByID)
@@ -88,11 +90,11 @@ func (s MenuHandler) UpdateMenu(w http.ResponseWriter, r *http.Request) {
 	_ = json.NewDecoder(r.Body).Decode(&changeMenu)
 	err := s.MenuUseCase.UpdateMenusByID(idMenu, changeMenu)
 	if err != nil {
-		w.Write([]byte("Id Not Found"))
-		log.Println("Data not found")
+		w.Write([]byte("Id Menu Not Found"))
+		log.Println("Data Menu not found")
 	} else {
-		w.Write([]byte("Data Updated"))
-		log.Println("Data Updated")
+		w.Write([]byte("Data Menu Updated"))
+		log.Println("Data Menu Updated")
 	}
 
 }
@@ -104,10 +106,10 @@ func (s MenuHandler) DeleteMenu(w http.ResponseWriter, r *http.Request) {
 	_ = json.NewDecoder(r.Body).Decode(&s)
 	err := s.MenuUseCase.DeleteMenusByID(idMenu)
 	if err != nil {
-		w.Write([]byte("Data Not Found"))
-		log.Println("Data not found")
+		w.Write([]byte("Data Menu Not Found"))
+		log.Println("Data Menu not found")
 	} else {
-		w.Write([]byte("Data Deleted"))
-		log.Println("Data Deleted")
+		w.Write([]byte("Data Menu Deleted"))
+		log.Println("Data Menu Deleted")
 	}
 }

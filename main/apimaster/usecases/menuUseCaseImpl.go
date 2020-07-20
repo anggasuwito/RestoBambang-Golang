@@ -4,7 +4,6 @@ import (
 	"gomux/main/apimaster/models"
 	"gomux/main/apimaster/repositories"
 	"gomux/utils"
-	"log"
 )
 
 //MenuUsecaseImpl MenuUsecaseImpl
@@ -30,7 +29,7 @@ func (s MenuUsecaseImpl) AddMenu(newMenu models.Menu) error {
 	}
 	err = s.menuRepo.AddMenu(newMenu)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	return err
 }

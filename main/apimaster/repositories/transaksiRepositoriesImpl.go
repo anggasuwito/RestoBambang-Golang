@@ -3,7 +3,6 @@ package repositories
 import (
 	"database/sql"
 	"gomux/main/apimaster/models"
-	"log"
 
 	"github.com/google/uuid"
 )
@@ -41,10 +40,9 @@ func (s TransaksiRepoImpl) AddTransaksi(newTransaksi models.Transaksi) error {
 	_, err = s.db.Query(query, newTransaksiID, &newTransaksi.TanggalTransaksi, &newTransaksi.IDMenu, &newTransaksi.Quantity)
 	if err != nil {
 		tr.Rollback()
-		log.Fatal(err)
-	} else {
-		tr.Commit()
+		return err
 	}
+	tr.Commit()
 
 	return nil
 }
@@ -99,10 +97,9 @@ func (s TransaksiRepoImpl) DeleteDataTransaksiByID(id string) error {
 	_, err = s.db.Query(query, id)
 	if err != nil {
 		tr.Rollback()
-		log.Fatal(err)
-	} else {
-		tr.Commit()
+		return err
 	}
+	tr.Commit()
 
 	return nil
 }

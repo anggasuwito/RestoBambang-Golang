@@ -31,16 +31,17 @@ func (s TransaksiHandler) AllTransaksi(w http.ResponseWriter, r *http.Request) {
 	allTransaksi, err := s.TransaksiUseCase.GetAllTransaksi()
 	w.Header().Set("Content-Type", "application/json")
 	if err != nil {
-		w.Write([]byte("Data Not Found"))
-		log.Println("Data Not Found")
+		w.Write([]byte("Data Transaksi Not Found"))
+		log.Println("Data Transaksi Not Found")
 	}
 	transaksiResponse := utils.Response{Status: http.StatusOK, Messages: "Data of Transaksi", Data: allTransaksi}
 	byteOfTransaksiResponse, err := json.Marshal(transaksiResponse)
 	if err != nil {
-		w.Write([]byte("Oops something when wrong"))
-		log.Println("Oops something when wrong")
+		w.Write([]byte("Oops something when wrong from Transaksi"))
+		log.Println("Oops something when wrong from Transaksi")
 	}
-
+	log.Println("Get All Transaksi Success")
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(byteOfTransaksiResponse)
 }
@@ -51,11 +52,11 @@ func (s TransaksiHandler) AddTransaksi(w http.ResponseWriter, r *http.Request) {
 	_ = json.NewDecoder(r.Body).Decode(&newTransaksi)
 	err := s.TransaksiUseCase.AddTransaksi(newTransaksi)
 	if err != nil {
-		w.Write([]byte("Insert Failed Cannot null"))
+		w.Write([]byte("Insert Transaksi Failed Cannot null"))
 		log.Print(err)
 	} else {
-		w.Write([]byte("Insert Success"))
-		log.Println("Insert Success")
+		w.Write([]byte("Insert Transaksi Success"))
+		log.Println("Insert Transaksi Success")
 	}
 }
 
@@ -65,15 +66,16 @@ func (s TransaksiHandler) TransaksiByID(w http.ResponseWriter, r *http.Request) 
 	idTransaksi := param["id"]
 	transaksi, err := s.TransaksiUseCase.GetTransaksiByID(idTransaksi)
 	if err != nil {
-		w.Write([]byte("Data Not Found"))
-		log.Println("Data not found")
+		w.Write([]byte("Data Transaksi Not Found"))
+		log.Println("Data Transaksi not found")
 	}
 	transaksiResponseByID := utils.Response{Status: http.StatusOK, Messages: "Data of Transaksi", Data: transaksi}
 	byteOfResponseTransaksiByID, err2 := json.Marshal(transaksiResponseByID)
 	if err2 != nil {
-		w.Write([]byte("Oops something when wrong"))
-		log.Println("Oops something when wrong")
+		w.Write([]byte("Oops something when wrong from Transaksi "))
+		log.Println("Oops something when wrong from Transaksi ")
 	} else if err == nil {
+		log.Println("Get Transaksi from ID Success")
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		w.Write(byteOfResponseTransaksiByID)
@@ -88,11 +90,11 @@ func (s TransaksiHandler) UpdateTransaksi(w http.ResponseWriter, r *http.Request
 	_ = json.NewDecoder(r.Body).Decode(&changeTransaksi)
 	err := s.TransaksiUseCase.UpdateTransaksiByID(idTransaksi, changeTransaksi)
 	if err != nil {
-		w.Write([]byte("Id Not Found"))
-		log.Println("Data not found")
+		w.Write([]byte("Id Transaksi Not Found"))
+		log.Println("Data Transaksi not found")
 	} else {
-		w.Write([]byte("Data Updated"))
-		log.Println("Data Updated")
+		w.Write([]byte("Data Transaksi Updated"))
+		log.Println("Data Transaksi Updated")
 	}
 
 }
@@ -104,10 +106,10 @@ func (s TransaksiHandler) DeleteTransaksi(w http.ResponseWriter, r *http.Request
 	_ = json.NewDecoder(r.Body).Decode(&s)
 	err := s.TransaksiUseCase.DeleteTransaksiByID(idTransaksi)
 	if err != nil {
-		w.Write([]byte("Data Not Found"))
-		log.Println("Data not found")
+		w.Write([]byte("Data Transaksi Not Found"))
+		log.Println("Data Transaksi not found")
 	} else {
-		w.Write([]byte("Data Deleted"))
-		log.Println("Data Deleted")
+		w.Write([]byte("Data Transaksi Deleted"))
+		log.Println("Data Transaksi Deleted")
 	}
 }
