@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"encoding/json"
-	"fmt"
 	"gomux/main/apimaster/models"
 	"gomux/main/apimaster/usecases"
 	"gomux/utils"
@@ -32,7 +31,6 @@ func (s MenuHandler) AllMenus(w http.ResponseWriter, r *http.Request) {
 	keywords := mux.Vars(r)["keywords"]
 	page := mux.Vars(r)["page"]
 	limit := mux.Vars(r)["limit"]
-	fmt.Println(keywords, page, limit)
 	allMenus, err := s.MenuUseCase.GetAllMenus(keywords, page, limit)
 	w.Header().Set("Content-Type", "application/json")
 	if err != nil {
