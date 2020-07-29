@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
 	"gomux/main/apimaster/models"
 	"gomux/main/apimaster/usecases"
 	"gomux/utils"
@@ -19,7 +20,7 @@ type MenuHandler struct {
 //MenuController MenuController
 func MenuController(r *mux.Router, service usecases.MenuUseCase) {
 	MenuHandler := MenuHandler{service}
-	r.HandleFunc("/allmenus", MenuHandler.AllMenus).Methods(http.MethodGet)
+	r.HandleFunc("/allmenus", MenuHandler.AllMenus).Methods(http.MethodGet).Queries("keywords", "{keywords}", "page", "{page}", "limit", "{limit}")
 	r.HandleFunc("/menu/{id}", MenuHandler.MenuByID).Methods(http.MethodGet)
 	r.HandleFunc("/menu", MenuHandler.AddMenu).Methods(http.MethodPost)
 	r.HandleFunc("/menu/{id}", MenuHandler.UpdateMenu).Methods(http.MethodPut)
@@ -28,7 +29,11 @@ func MenuController(r *mux.Router, service usecases.MenuUseCase) {
 
 //AllMenus AllMenus
 func (s MenuHandler) AllMenus(w http.ResponseWriter, r *http.Request) {
-	allMenus, err := s.MenuUseCase.GetAllMenus()
+	keywords := mux.Vars(r)["keywords"]
+	page := mux.Vars(r)["page"]
+	limit := mux.Vars(r)["limit"]
+	fmt.Println(keywords, page, limit)
+	allMenus, err := s.MenuUseCase.GetAllMenus(keywords, page, limit)
 	w.Header().Set("Content-Type", "application/json")
 	if err != nil {
 		w.Write([]byte("Data Menu Not Found"))

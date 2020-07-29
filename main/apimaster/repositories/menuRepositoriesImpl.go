@@ -2,6 +2,7 @@ package repositories
 
 import (
 	"database/sql"
+	"fmt"
 	"gomux/main/apimaster/models"
 
 	"github.com/google/uuid"
@@ -13,9 +14,9 @@ type MenuRepoImpl struct {
 }
 
 //GetAllMenus GetAllMenus
-func (s MenuRepoImpl) GetAllMenus() ([]*models.Menu, error) {
+func (s MenuRepoImpl) GetAllMenus(keywords string, page string, limit string) ([]*models.Menu, error) {
 	dataMenus := []*models.Menu{}
-	query := `select * from menu`
+	query := fmt.Sprintf(`select * from menu WHERE (jenis_menu LIKE '%v%v%v' or nama_menu LIKE '%v%v%v') LIMIT %v,%v`, "%", keywords, "%", "%", keywords, "%", page, limit)
 	data, err := s.db.Query(query)
 	if err != nil {
 		return nil, err

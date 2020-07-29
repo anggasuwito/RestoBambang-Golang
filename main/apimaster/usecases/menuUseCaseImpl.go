@@ -12,8 +12,8 @@ type MenuUsecaseImpl struct {
 }
 
 //GetAllMenus GetMenus
-func (s MenuUsecaseImpl) GetAllMenus() ([]*models.Menu, error) {
-	menu, err := s.menuRepo.GetAllMenus()
+func (s MenuUsecaseImpl) GetAllMenus(keywords string, page string, limit string) ([]*models.Menu, error) {
+	menu, err := s.menuRepo.GetAllMenus(keywords, page, limit)
 	if err != nil {
 		return nil, err
 	}

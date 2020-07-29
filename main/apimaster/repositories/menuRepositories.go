@@ -8,5 +8,5 @@ type MenuRepository interface {
 	GetMenuByID(id string) (models.Menu, error)
 	UpdateMenusByID(id string, changeMenu models.Menu) error
 	DeleteDataMenuByID(id string) error
-	GetAllMenus() ([]*models.Menu, error)
+	GetAllMenus(keywords string, page string, limit string) ([]*models.Menu, error)
 }
