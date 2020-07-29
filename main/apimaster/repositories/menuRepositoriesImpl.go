@@ -14,22 +14,25 @@ type MenuRepoImpl struct {
 }
 
 //GetAllMenus GetAllMenus
-func (s MenuRepoImpl) GetAllMenus(keywords string, page string, limit string) ([]*models.Menu, error) {
+func (s MenuRepoImpl) GetAllMenus(keywords string, page string, limit string) ([]*models.Menu, string, error) {
 	dataMenus := []*models.Menu{}
 	query := fmt.Sprintf(`select * from menu WHERE (jenis_menu LIKE '%v%v%v' or nama_menu LIKE '%v%v%v') LIMIT %v,%v`, "%", keywords, "%", "%", keywords, "%", page, limit)
 	data, err := s.db.Query(query)
 	if err != nil {
-		return nil, err
+		return nil, "", err
 	}
 	for data.Next() {
 		menu := models.Menu{}
 		var err = data.Scan(&menu.IDMenu, &menu.JenisMenu, &menu.NamaMenu, &menu.HargaMenu, &menu.StokMenu)
 		if err != nil {
-			return nil, err
+			return nil, "", err
 		}
 		dataMenus = append(dataMenus, &menu)
 	}
-	return dataMenus, nil
+	var getTotalData string
+	totalData := fmt.Sprintf(`select count(*) from (select * from menu WHERE (jenis_menu LIKE '%v%v%v' or nama_menu LIKE '%v%v%v')) as menu`, "%", keywords, "%", "%", keywords, "%")
+	s.db.QueryRow(totalData).Scan(&getTotalData)
+	return dataMenus, getTotalData, nil
 }
 
 //AddMenu InsertMenuData

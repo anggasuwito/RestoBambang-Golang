@@ -12,12 +12,12 @@ type MenuUsecaseImpl struct {
 }
 
 //GetAllMenus GetMenus
-func (s MenuUsecaseImpl) GetAllMenus(keywords string, page string, limit string) ([]*models.Menu, error) {
-	menu, err := s.menuRepo.GetAllMenus(keywords, page, limit)
+func (s MenuUsecaseImpl) GetAllMenus(keywords string, page string, limit string) ([]*models.Menu, string, error) {
+	menu, totalData, err := s.menuRepo.GetAllMenus(keywords, page, limit)
 	if err != nil {
-		return nil, err
+		return nil, "", err
 	}
-	return menu, nil
+	return menu, totalData, nil
 }
 
 //AddMenu InsertMenus

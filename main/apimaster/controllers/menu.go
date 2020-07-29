@@ -31,13 +31,13 @@ func (s MenuHandler) AllMenus(w http.ResponseWriter, r *http.Request) {
 	keywords := mux.Vars(r)["keywords"]
 	page := mux.Vars(r)["page"]
 	limit := mux.Vars(r)["limit"]
-	allMenus, err := s.MenuUseCase.GetAllMenus(keywords, page, limit)
+	allMenus, totalData, err := s.MenuUseCase.GetAllMenus(keywords, page, limit)
 	w.Header().Set("Content-Type", "application/json")
 	if err != nil {
 		w.Write([]byte("Data Menu Not Found"))
 		log.Println("Data Menu Not Found")
 	}
-	menuResponse := utils.Response{Status: http.StatusOK, Messages: "Data of Menu", Data: allMenus}
+	menuResponse := utils.Response{Status: http.StatusOK, Messages: "Data of Menu", Data: allMenus, TotalData: totalData}
 	byteOfMenuResponse, err := json.Marshal(menuResponse)
 	if err != nil {
 		w.Write([]byte("Oops something when wrong from Menu"))
