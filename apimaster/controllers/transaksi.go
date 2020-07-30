@@ -2,11 +2,11 @@ package controllers
 
 import (
 	"encoding/json"
-	"gomux/main/apimaster/models"
-	"gomux/main/apimaster/usecases"
-	"gomux/utils"
 	"log"
 	"net/http"
+	"restoAPI/apimaster/models"
+	"restoAPI/apimaster/usecases"
+	"restoAPI/utils"
 
 	"github.com/gorilla/mux"
 )

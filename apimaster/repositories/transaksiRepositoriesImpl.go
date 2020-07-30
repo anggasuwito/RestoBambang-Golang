@@ -2,7 +2,7 @@ package repositories
 
 import (
 	"database/sql"
-	"gomux/main/apimaster/models"
+	"restoAPI/apimaster/models"
 
 	"github.com/google/uuid"
 )

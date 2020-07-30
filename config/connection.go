@@ -13,7 +13,7 @@ import (
 //GetCustomConf GetCustomConf
 func GetCustomConf(key, defVal string) string {
 	viper.SetConfigName("configfile")
-	viper.AddConfigPath("../config/")
+	viper.AddConfigPath("./config/")
 	if err := viper.ReadInConfig(); err != nil {
 		log.Printf("Keyname : %v, not found, default key value : %v, has been loaded", key, defVal)
 		return defVal

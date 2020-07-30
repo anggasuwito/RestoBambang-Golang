@@ -1,9 +1,9 @@
 package usecases
 
 import (
-	"gomux/main/apimaster/models"
-	"gomux/main/apimaster/repositories"
-	"gomux/utils"
+	"restoAPI/apimaster/models"
+	"restoAPI/apimaster/repositories"
+	"restoAPI/utils"
 )
 
 //MenuUsecaseImpl MenuUsecaseImpl

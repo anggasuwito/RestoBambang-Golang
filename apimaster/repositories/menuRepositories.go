@@ -1,6 +1,6 @@
 package repositories
 
-import "gomux/main/apimaster/models"
+import "restoAPI/apimaster/models"
 
 //MenuRepository MenuRepository
 type MenuRepository interface {

@@ -1,7 +1,7 @@
 package main
 
 import (
-	master "gomux/main/apimaster"
+	master "restoAPI/apimaster"
 )
 
 func main() {

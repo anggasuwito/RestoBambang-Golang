@@ -1,10 +1,10 @@
 package master
 
 import (
-	"gomux/config"
-	"gomux/main/apimaster/controllers"
-	"gomux/main/apimaster/repositories"
-	"gomux/main/apimaster/usecases"
+	"restoAPI/apimaster/controllers"
+	"restoAPI/apimaster/repositories"
+	"restoAPI/apimaster/usecases"
+	"restoAPI/config"
 )
 
 //Init Init
