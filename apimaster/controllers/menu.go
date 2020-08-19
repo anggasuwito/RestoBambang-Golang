@@ -7,6 +7,7 @@ import (
 	"restoAPI/apimaster/models"
 	"restoAPI/apimaster/usecases"
 	"restoAPI/utils"
+	"strconv"
 
 	"github.com/gorilla/mux"
 )
@@ -31,6 +32,9 @@ func (s MenuHandler) AllMenus(w http.ResponseWriter, r *http.Request) {
 	keywords := mux.Vars(r)["keywords"]
 	page := mux.Vars(r)["page"]
 	limit := mux.Vars(r)["limit"]
+	convertPage, _ := strconv.Atoi(page)
+	convertLimit, _ := strconv.Atoi(limit)
+	page = strconv.Itoa(convertPage*convertLimit - convertLimit)
 	allMenus, totalData, err := s.MenuUseCase.GetAllMenus(keywords, page, limit)
 	w.Header().Set("Content-Type", "application/json")
 	if err != nil {
